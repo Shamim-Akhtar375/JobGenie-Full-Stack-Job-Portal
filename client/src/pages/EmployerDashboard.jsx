@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Plus, Trash2, Users, Briefcase, MapPin, DollarSign, Clock } from 'lucide-react';
 
 const EmployerDashboard = () => {
@@ -13,7 +13,7 @@ const EmployerDashboard = () => {
 
     const fetchEmployerJobs = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/jobs/employer', {
+            const res = await api.get('/jobs/employer', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setJobs(res.data);
@@ -25,7 +25,7 @@ const EmployerDashboard = () => {
     const handlePostJob = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/jobs', newJob, {
+            await api.post('/jobs', newJob, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Job posted successfully!');
@@ -40,7 +40,7 @@ const EmployerDashboard = () => {
     const handleDeleteJob = async (id) => {
         if (!window.confirm('Are you sure you want to delete this job?')) return;
         try {
-            await axios.delete(`http://localhost:5000/api/jobs/${id}`, {
+            await api.delete(`/jobs/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchEmployerJobs();
@@ -51,7 +51,7 @@ const EmployerDashboard = () => {
 
     const fetchApplications = async (jobId) => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/applications/job/${jobId}`, {
+            const res = await api.get(`/applications/job/${jobId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setApplications(res.data);
@@ -63,7 +63,7 @@ const EmployerDashboard = () => {
 
     const handleUpdateStatus = async (appId, status) => {
         try {
-            await axios.put(`http://localhost:5000/api/applications/${appId}/status`, { status }, {
+            await api.put(`/applications/${appId}/status`, { status }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             fetchApplications(selectedJobId);

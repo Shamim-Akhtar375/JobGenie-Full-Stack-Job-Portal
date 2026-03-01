@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { User, Mail, Lock, UserPlus, Briefcase, UserCheck } from 'lucide-react';
 
 const Register = () => {
@@ -10,7 +10,7 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/auth/register', formData);
+            await api.post('/auth/register', formData);
             alert('Registration successful! Please login.');
             navigate('/login');
         } catch (err) {

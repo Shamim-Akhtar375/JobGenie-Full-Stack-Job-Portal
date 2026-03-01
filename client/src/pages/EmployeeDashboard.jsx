@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Clock, CheckCircle, XCircle, Briefcase, MapPin, DollarSign, User } from 'lucide-react';
 
 const EmployeeDashboard = () => {
@@ -9,7 +9,7 @@ const EmployeeDashboard = () => {
     const fetchApplications = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/applications/employee', {
+            const res = await api.get('/applications/employee', {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setApplications(res.data);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 import { Mail, Lock, User, LogIn } from 'lucide-react';
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', formData);
+            const res = await api.post('/auth/login', formData);
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('user', JSON.stringify(res.data.user));
             navigate(res.data.user.role === 'employer' ? '/employer-dashboard' : '/employee-dashboard');

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../utils/api';
 import { Search, MapPin, DollarSign, Briefcase, Filter, ChevronRight, Clock, Star } from 'lucide-react';
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
 
     const fetchJobs = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/jobs', { params: filters });
+            const res = await api.get('/jobs', { params: filters });
             // If API returns jobs, use them; otherwise, use our featured demo jobs
             setJobs(res.data.length > 0 ? res.data : featuredJobs.filter(j =>
                 j.title.toLowerCase().includes(filters.title.toLowerCase()) &&
@@ -47,7 +47,7 @@ const Home = () => {
 
         try {
             const token = localStorage.getItem('token');
-            await axios.post('http://localhost:5000/api/applications/apply', { job_id: jobId }, {
+            await api.post('/applications/apply', { job_id: jobId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             alert('Applied successfully!');
