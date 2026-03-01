@@ -2,6 +2,8 @@
 
 JobGenie is a modern, production-ready full-stack job portal designed for both employers and job seekers. It features a stunning glassmorphic UI, role-based authentication, and a clean RESTful API.
 
+**Live Demo:** [JobGenie Live](https://Shamim-Akhtar375.github.io/JobGenie-Full-Stack-Job-Portal)
+
 ## 🛠️ Tech Stack
 
 - **Frontend:** React.js, Vite, Framer Motion, Lucide Icons
